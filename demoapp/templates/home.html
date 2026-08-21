@@ -9,7 +9,7 @@
     <h1>Welcome to My Flask App</h1>
     <p>This is a simple Flask application.</p>
     {% if current_user.is_authenticated %}
-    <p>Hello, {{ current_user.username }}! You are logged in.</p>
+    <p id="welcome-message">Hello, {{ current_user.username }}! You are logged in.</p>
     <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
     {% else %}
     <a href="{{ url_for('login_view') }}" class="btn btn-primary">Login</a>
