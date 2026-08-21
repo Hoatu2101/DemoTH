@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.11'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
 
     triggers {
         githubPush()
@@ -15,8 +20,6 @@ pipeline {
         stage('Setup Environment') {
             steps {
                 sh '''
-                    sudo apt-get update -y
-                    sudo apt-get install -y python3 python3-pip python3-venv
                     python3 -m venv .venv
                     . .venv/bin/activate
                     pip install --upgrade pip
