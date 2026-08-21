@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.11-slim'
-        }
-    }
+    agent any
 
     triggers {
         githubPush()
@@ -17,6 +13,12 @@ pipeline {
         }
 
         stage('Setup Environment') {
+             agent {
+                docker {
+                    image 'python:3.11-slim'
+                    reuseNode true 
+                }
+            }
             steps {
                 sh '''
                     python3 -m venv .venv
